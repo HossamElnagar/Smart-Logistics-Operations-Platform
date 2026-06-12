@@ -97,6 +97,15 @@ const incidentSchema = new Schema<IIncident>(
   }
 );
 
+incidentSchema.index({
+  companyId: 1,
+  status: 1,
+});
+
+incidentSchema.index({
+  relatedEntityType: 1,
+  relatedEntityId: 1,
+});
 export const Incident = mongoose.model<IIncident>(
   "Incident",
   incidentSchema

@@ -3,7 +3,7 @@ import { UserRole } from "../types/user.type.js";
 
 export interface IUser extends Document {
     companyId: mongoose.Types.ObjectId;
-    name: String ;
+    userName: String ;
     email: String ; 
     password: String;
     phone?: String;
@@ -24,7 +24,7 @@ const userSchema = new Schema<IUser> (
             index: true,
 
         },
-        name:{
+        userName:{
             type:String,
             required: true,
         },
@@ -57,6 +57,8 @@ const userSchema = new Schema<IUser> (
 
 )
 
+userSchema.index({ email: 1 });
+userSchema.index({ companyId: 1 });
 export const User = mongoose.model<IUser>(
     "User",
     userSchema

@@ -61,6 +61,13 @@ const shipmentTimelineSchema =
     }
   );
 
+  
+  shipmentTimelineSchema.index({
+  shipmentId: 1,
+  createdAt: -1
+});
+
+
 export const ShipmentTimeline =
   mongoose.model<IShipmentTimeline>(
     "ShipmentTimeline",

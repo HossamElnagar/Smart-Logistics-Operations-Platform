@@ -3,36 +3,45 @@ import {companyPlan} from "../types/company.type.js"
 
 
 
+
 export interface ICompany extends Document{
-    name: string;
+    companyName: string;
     slug: string;
     email: string;
-    phone?: string; // ? refer to optional not required
+    companyEmail: string;
+    founderName: string;
+    phone?: string; 
     industry: string;
     logo?: string;
     isActive: boolean;
     subscriptionPlan: companyPlan;
     ownerId: mongoose.Types.ObjectId;
 
-    createdAt: Date;
-    updatedAt: Date;
 }
 
 const companySchema = new Schema<ICompany>(
     {
-        name:{
+        companyName:{
             type:String,
-            required:true
+            trim:true,
+            required:true,
         },
         slug:{
             type: String,
             required: true,
-            unique: true
+            trim:true,
+            unique: true,
         },
-        email:{
+        companyEmail:{
             type: String,
             required: true,
-            unique:true
+            trim:true,
+            unique:true,
+        },
+        founderName:{
+            type:String,
+            required: true,
+            trim:true,
         },
         phone: String
         ,
@@ -54,6 +63,7 @@ const companySchema = new Schema<ICompany>(
         ownerId:{
             type: Schema.Types.ObjectId,
             ref:"User",
+            required: true,
         },
 
 
@@ -61,6 +71,12 @@ const companySchema = new Schema<ICompany>(
 },{timestamps:true}
 
 )
+
+//1 means Ascending Index 
+//-1 means Descending Index
+companySchema.index({slug: 1})
+companySchema.index({email: 1})
+
 
 export const Company = mongoose.model<ICompany>(
     "Company",

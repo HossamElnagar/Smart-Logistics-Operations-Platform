@@ -103,6 +103,11 @@ const shipmentSchema = new Schema<IShipment>(
   }
 );
 
+
+shipmentSchema.index({ companyId: 1 });
+shipmentSchema.index({ assignedDriverId: 1 });
+shipmentSchema.index({ status: 1 });
+
 export const Shipment = mongoose.model<IShipment>(
   "Shipment",
   shipmentSchema

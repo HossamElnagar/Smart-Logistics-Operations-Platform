@@ -4,7 +4,7 @@ import { companyPlan } from "../types/company.type.js";
 const objectIdPattern = /^[0-9a-fA-F]{24}$/;
 
 export const createCompanySchema = joi.object({
-    name: joi.string().min(3).max(200)
+    companyName: joi.string().min(3).max(200)
     .required()
     .messages({
         "string.min":"Company name must be at least 3 characters long.",
@@ -17,11 +17,12 @@ export const createCompanySchema = joi.object({
         "string.max": "slugan must be max 200 characters long.",
         "any.required": "slugan is required for URL generation."
     }),
-    emmail: joi.string().email().required()
+    comapnyEmail: joi.string().email().required()
     .messages({
         "string.email": "Inavalid email format",
         "any.required" : "Company email is required"
     }),
+    founderName: joi.string().min(10).max(100).required().trim(),
 
     phone: joi.string().regex(/^[0-9]+$/).optional()
     .messages({
