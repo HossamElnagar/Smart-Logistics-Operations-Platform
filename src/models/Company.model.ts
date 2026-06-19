@@ -75,7 +75,7 @@ const companySchema = new Schema<ICompany>(
 //1 means Ascending Index 
 //-1 means Descending Index
 companySchema.index({slug: 1})
-companySchema.index({email: 1})
+companySchema.index({CompanyEmail: 1})
 
 
 export const Company = mongoose.model<ICompany>(

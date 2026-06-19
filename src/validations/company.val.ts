@@ -58,16 +58,25 @@ export const createCompanySchema = joi.object({
 });
 
 // 2. Update Company Validation (When editing company settings)
-export const updateCompanyValidation = joi.object({
-  name: joi.string().min(2).max(100).optional(),
-  slug: joi.string().min(2).max(100).optional(),
-  email: joi.string().email().optional(),
-  phone: joi.string().regex(/^[0-9]+$/).optional(),
-  industry: joi.string().optional(),
-  logo: joi.string().uri().optional(),
-  
-  // These fields are optional during update but highly sensitive
-  subscriptionPlan: joi.string().valid(...Object.values(companyPlan)).optional(),
-  isActive: joi.boolean().optional()
+export const updateCompanySchema = joi.object({
+  companyName: joi.string().min(3).max(100),
 
+  slug: joi.string().min(3).max(50),
+
+  companyEmail: joi.string().email(),
+
+  founderName: joi.string().min(3).max(100),
+
+  phone: joi.string().pattern(/^[0-9]+$/),
+
+  industry: joi.string(),
+
+  logo: joi.string().uri({
+    scheme: ["http", "https"],
+  }),
 })
+.min(1)
+.options({
+  abortEarly: false,
+  stripUnknown: true,
+});

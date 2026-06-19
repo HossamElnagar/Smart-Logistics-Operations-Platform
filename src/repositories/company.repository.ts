@@ -11,8 +11,8 @@ export class CompanyRepository {
     return await Company.findById(id).populate("ownerId", "name email role");
   }
 
-  async findByEmail(email: string) {
-    return await Company.findOne({ email });
+  async findByEmail(companyEmail: string) {
+    return await Company.findOne({ companyEmail });
   }
 
   async findBySlug(slug: string) {

@@ -6,7 +6,7 @@ const companyRepo = new CompanyRepository();
 export class companyService {
 
     async createCompany(data: any){
-        const existing = await companyRepo.findByEmail(data.email);
+        const existing = await companyRepo.findByEmail(data.comapnyEmail);
 
         if (existing) {
             throw new Error("Company already exists");
@@ -38,7 +38,7 @@ export class companyService {
             throw new Error("Invalid Company ID format");
             }
 
-            if (data.email) {
+            if (data.CompanyEmail) {
             const emailExists = await companyRepo.findByEmail(data.email);
            //find if email exist and id not the same
             if (emailExists && emailExists._id.toString() !== id) {
